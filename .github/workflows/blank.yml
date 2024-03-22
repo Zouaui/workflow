@@ -11,12 +11,7 @@ on:
   release:
     types: [prereleased,released]
 
-environments:
-  release:
-    required_reviewers:
-      users:
-        - zouaoui-faycal    
-    review_message: "validation"
+
 jobs:
   build:
     runs-on: ubuntu-latest
