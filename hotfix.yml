@@ -1,0 +1,59 @@
+name: Docker Build & Deploy
+
+on:
+  push:
+    branches:
+      - hotfix/*
+  workflow_dispatch:
+    inputs:
+      branch:
+      
+      environment:
+        description: 'Environment to run tests against'
+        type: choice
+        options: 
+          - int
+          - stg
+          - ppd
+          - prd
+          
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build
+      run: echo "Build"
+      
+  Trivy:
+    runs-on: ubuntu-latest
+    needs: Build    
+    steps:
+    - name: Trivy
+      run: echo "Trivy"
+      
+  Sonar:
+    runs-on: ubuntu-latest
+    needs: Build    
+    steps:
+    - name: Sonar
+      run: echo "Sonar"
+      
+  Mvn:
+    runs-on: ubuntu-latest
+    needs: Build    
+    steps:
+    - name: Mvn
+      run: echo "Mvn"
+      
+  Deploy:
+    name: deploy ${{ inputs.environment }}
+    needs: 
+      - Build
+      - Trivy  
+      - Mvn
+      - Sonar
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to Integration and Staging
+      run: |
+        echo "Deploy to ${{ inputs.environment }}"
