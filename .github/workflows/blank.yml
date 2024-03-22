@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - hotfix/*
+      - feature/*
       - main
   pull_request:
     branches:
       - main
+    types: [closed]
   release:
     types: [prereleased,released]
 
