@@ -1,13 +1,11 @@
-name: Docker Build & Deploy
+name: deploy a Hotfix
 
 on:
   push:
     branches:
       - hotfix/*
   workflow_dispatch:
-    inputs:
-      branch:
-      
+    inputs:     
       environment:
         description: 'Environment to run tests against'
         type: choice
