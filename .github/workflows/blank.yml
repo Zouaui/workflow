@@ -11,42 +11,40 @@ on:
   release:
     types: [prereleased,released]
 
-
 jobs:
-  build:
+  Build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: build
-      run: echo "build"
+    - name: Build
+      run: echo "Build"
       
-  trivy:
+  Trivy:
     runs-on: ubuntu-latest
-    needs: build    
+    needs: Build    
     steps:
-    - name: trivy
-      run: echo "trivy"
+    - name: Trivy
+      run: echo "Trivy"
       
-  sonar:
+  Sonar:
     runs-on: ubuntu-latest
-    needs: build    
+    needs: Build    
     steps:
-    - name: sonar
-      run: echo "sonar"
+    - name: Sonar
+      run: echo "Sonar"
       
-  MVN:
+  Mvn:
     runs-on: ubuntu-latest
-    needs: build    
+    needs: Build    
     steps:
-    - name: MVN
-      run: echo "MVN"
+    - name: Mvn
+      run: echo "Mvn"
       
-  deploy-integration-and-staging:
+  Deploy-Integration-and-Staging:
     needs: 
-      - build
-      - trivy  
-      - MVN
-      - sonar
+      - Build
+      - Trivy  
+      - Mvn
+      - Sonar
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'pull_request'
 
@@ -56,25 +54,24 @@ jobs:
         # Deployment scripts for integration (int) and staging (stg)
         echo "Deploy to Integration and Staging"
 
-  deploy-pre-production:
+  Deploy-Pre-Production:
     needs: 
-      - build
-      - trivy
-      - MVN
-      - sonar      
+      - Build
+      - Trivy
+      - Mvn
+      - Sonar      
     runs-on: ubuntu-latest
     if: github.event.release.prerelease == true || (github.event_name == 'push' &&  startsWith(github.ref, 'refs/heads/hotfix/'))
     environment: ppd
-
     steps:
     - name: Deploy to Pre-production
       run: |
         # Deployment script for pre-production (ppd)
         echo "Deployment script for pre-production (ppd)"
 
-  release:
+  Release:
     runs-on: ubuntu-latest
-    needs: deploy-pre-production
+    needs: Deploy-Pre-Production
     environment: release   
     permissions:
       contents: write    
@@ -92,9 +89,9 @@ jobs:
       with:
         prerelease: false
         
-  deploy-production:
+  Deploy-Production:
     runs-on: ubuntu-latest
-    needs: release
+    needs: Release
     environment: prd
     steps:
     - name: Deploy to Production
