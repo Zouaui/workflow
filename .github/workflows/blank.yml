@@ -44,7 +44,7 @@ jobs:
       - build
       - trivy
     runs-on: ubuntu-latest
-    if: github.event.release.prerelease == true || (github.event_name == 'push' &&  startsWith(github.ref, 'refs/heads/hotfix/')
+    if: github.event.release.prerelease == true || (github.event_name == 'push' &&  startsWith(github.ref, 'refs/heads/hotfix/'))
     environment: ppd
 
     steps:
