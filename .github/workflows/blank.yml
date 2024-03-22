@@ -54,6 +54,7 @@ jobs:
         # Deployment scripts for integration (int) and staging (stg)
         echo "Deploy to Integration and Staging"
 
+
   Deploy-Pre-Production:
     needs: 
       - Build
@@ -68,6 +69,11 @@ jobs:
       run: |
         # Deployment script for pre-production (ppd)
         echo "Deployment script for pre-production (ppd)"
+    - name: Bump version and push tag
+      id: tag_version
+      uses: mathieudutour/github-tag-action@v6.2
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}        
 
   Release:
     runs-on: ubuntu-latest
