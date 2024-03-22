@@ -1,4 +1,4 @@
-name: deploy a Hotfix
+name:  Hotfix Deployment
 
 on:
   push:
