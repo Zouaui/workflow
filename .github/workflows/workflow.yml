@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - main
-    types: [closed]
+    types: [opned,closed]
   release:
     types: [prereleased,released]
 
