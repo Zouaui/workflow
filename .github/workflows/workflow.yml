@@ -44,7 +44,7 @@ jobs:
       - Mvn
       - Sonar
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request'
 
     steps:
     - name: Deploy to Integration and Staging
