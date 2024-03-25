@@ -1,9 +1,6 @@
 name:  Hotfix Deployment
 
 on:
-  push:
-    branches:
-      - hotfix/*
   workflow_dispatch:
     inputs:     
       environment:
