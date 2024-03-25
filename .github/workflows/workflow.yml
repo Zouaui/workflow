@@ -1,12 +1,13 @@
 name: Docker Build & Deploy
 
 on:
+  push:
   pull_request:
     branches:
       - main
     types: [opned,closed]
   release:
-    types: [prereleased,released]
+    types: [prereleased,released,review_requested]
 
 
 jobs:
@@ -14,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Build
-      run: echo "Build"
+      run: exit 1
       
   Trivy:
     runs-on: ubuntu-latest
