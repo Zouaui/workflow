@@ -12,6 +12,7 @@ on:
 jobs:
   Build:
     runs-on: ubuntu-latest
+    environment: int
     steps:
     - name: Build
       run: exit 1
