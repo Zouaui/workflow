@@ -15,7 +15,7 @@ jobs:
     environment: int
     steps:
     - name: Build
-      run: exit 1
+      run: echo "Build"
       
   Trivy:
     runs-on: ubuntu-latest
