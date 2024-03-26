@@ -1,6 +1,10 @@
 name: Docker Build & Deploy
 
 on:
+  pull_request:
+    branches:
+      - main
+    type: [closed]  
   release:
     types: [prereleased,released,review_requested]
 
