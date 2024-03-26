@@ -1,11 +1,6 @@
 name: Docker Build & Deploy
 
 on:
-  push:
-  pull_request:
-    branches:
-      - main
-    types: [opned,closed]
   release:
     types: [prereleased,released,review_requested]
 
@@ -45,8 +40,7 @@ jobs:
       - Mvn
       - Sonar
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && needs.Build.result == 'success'
-
+    if: success() && github.event_name == 'pull_request' 
     steps:
     - name: Deploy to Integration and Staging
       run: |
