@@ -2,10 +2,15 @@ name: Docker Build & Deploy
 
 on:
   push:
+    branches:
+      - feat*
+      - "*fix*"
+      
+      
   pull_request:
     branches:
       - main
-    type: [closed]  
+    types: [closed]  
   release:
     types: [prereleased,released,review_requested]
 
