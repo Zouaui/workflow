@@ -1,24 +1,26 @@
 name: Docker Build & Deploy
 
-on:
-  push:
-    branches:
-      - "feat**"
-      - "*fix*"
-      
-      
+on:      
   pull_request:
     branches:
       - main
     types: [closed]  
   release:
-    types: [prereleased,released,review_requested]
+    types: [prereleased]
 
 
 jobs:
   Build:
     runs-on: ubuntu-latest
     environment: int
+    steps:
+    - name: Build
+      run: echo "Build"
+      
+  Build-prod:
+    runs-on: ubuntu-latest
+    environment: int
+    if: github.event.release.prerelease == true 
     steps:
     - name: Build
       run: echo "Build"
@@ -61,12 +63,8 @@ jobs:
 
   Deploy-Pre-Production:
     needs: 
-      - Build
-      - Trivy
-      - Mvn
-      - Sonar      
+      - Build-prod   
     runs-on: ubuntu-latest
-    if: github.event.release.prerelease == true || (github.event_name == 'push' &&  startsWith(github.ref, 'refs/heads/hotfix/'))
     environment: ppd
     steps:
     - name: Deploy to Pre-production
