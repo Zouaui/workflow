@@ -55,7 +55,20 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
     steps:
+    - name: set tag 
+      run: | 
+        if [  github.event.inputs.build == 'true' ]; then
+            # Commandes à exécuter si RUN_ALL_JOBS est true
+            TAG="1"
+            echo "BIH 1"
+        else
+            TAG="3"
+            echo $TAG
+        fi
+            
     - name: Deploy to Integration and Staging
       run: |
-        echo "Deploy to ${{ inputs.environment }}"
+        echo "Deploy to ${{ inputs.environment }} $TAG"
+      env:
+        tag: ${{ 
         
