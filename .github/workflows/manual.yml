@@ -10,10 +10,14 @@ on:
           - int
           - stg
           - ppd
+      build:
+        type: boolean
+        default: true
           
           
 jobs:
   Sonar:
+    if: ${{ github.event.inputs.build == 'true' }}
     runs-on: ubuntu-latest
     steps:
     - name: Sonar
@@ -21,12 +25,14 @@ jobs:
       
   Mvn:
     runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.build == 'true' }}
     steps:
     - name: Mvn
       run: echo "Mvn"
       
   Build:
     runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.build == 'true' }}
     needs:
       - Mvn
       - Sonar
@@ -36,6 +42,7 @@ jobs:
       
   Trivy:
     runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.build == 'true' }}  
     needs: Build
     steps:
     - name: Trivy
@@ -44,7 +51,7 @@ jobs:
   Deploy:
     name: deploy ${{ inputs.environment }}
     needs: 
-      - Trivy  
+      - Trivy 
     runs-on: ubuntu-latest
     steps:
     - name: Deploy to Integration and Staging
