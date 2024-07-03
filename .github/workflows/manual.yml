@@ -69,6 +69,5 @@ jobs:
     - name: Deploy to Integration and Staging
       run: |
         echo "Deploy to ${{ inputs.environment }} $TAG"
-      env:
-        tag: ${{ 
+
         
