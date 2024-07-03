@@ -50,7 +50,7 @@ jobs:
       
   Deploy:
     name: deploy ${{ inputs.environment }}
-    needs: ${{ github.event.inputs.run-all-jobs == 'true' && ['trivy'] || [] }}
+    needs: ${{ github.event.inputs.build == 'false' || "trivy" }}
     runs-on: ubuntu-latest
     steps:
     - name: Deploy to Integration and Staging
