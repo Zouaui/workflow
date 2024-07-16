@@ -25,7 +25,7 @@ jobs:
       - name: Update PR data with dependencies
         if: ${{ steps.release_pr.outputs.prs_created }}
         run: |
-          if [ -z ${{ steps.generate-token.outputs.token }} ]; then
+          if [ -z ${{ secrets.GITHUB_TOKEN }} ]; then
             echo "token not set"
             exit 1
           fi  
