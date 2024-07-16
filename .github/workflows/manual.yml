@@ -2,52 +2,22 @@ name:  Manual Deployment
 
 on:
   workflow_dispatch:
-    inputs:     
-      environment:
-        description: 'Environment to run tests against'
-        type: choice
-        options: 
-          - int
-          - stg
-          - ppd
+
           
           
 jobs:
-  Sonar:
+  release-please:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write  
     steps:
-    - name: Sonar
-      run: echo "Sonar"
-      
-  Mvn:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Mvn
-      run: echo "Mvn"
-      
-  Build:
-    runs-on: ubuntu-latest
-    needs:
-      - Mvn
-      - Sonar
-    steps:
-    - name: Build
-      run: echo "Build"
-      
-  Trivy:
-    runs-on: ubuntu-latest
-    needs: Build
-    steps:
-    - name: Trivy
-      run: echo "Trivy"
-      
-  Deploy:
-    name: deploy ${{ inputs.environment }}
-    needs: 
-      - Trivy  
-    runs-on: ubuntu-latest
-    steps:
-    - name: Deploy to Integration and Staging
-      run: |
-        echo "Deploy to ${{ inputs.environment }}"
-        
+      - uses: actions/checkout@v4
+
+      - name: Create pre-release PR
+        id: release_pr
+        uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          skip-github-release: true
+          skip-github-pull-request: false
