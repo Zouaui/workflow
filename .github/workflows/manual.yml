@@ -1,4 +1,4 @@
-name:  Manual Deployment ${{ inputs.environment }}"
+name:  Manual Deployment ${{ inputs.environment }}
 
 on:
   workflow_dispatch:
