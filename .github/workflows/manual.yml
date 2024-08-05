@@ -11,7 +11,7 @@ on:
           
 jobs:
   build-and-deploy:
-  
+    name: test_${{ inputs.environment }}
     runs-on: ubuntu-latest
     steps:
       - name: Set up environment ${{ inputs.environment }}
