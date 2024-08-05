@@ -14,5 +14,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up environment
-        run: echo "Environment: ${{ inputs.environment }}"
+        run: echo "Environment"
       
