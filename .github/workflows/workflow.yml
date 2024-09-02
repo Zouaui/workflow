@@ -11,15 +11,14 @@ jobs:
       matrix:
         env: [dev, prd]
         component: [ WEBSERVERS, SQSWORKERS,WORKERS ]
-        suffix: ["-middle-ledgers-loader","-ledgers-wallets-loaderv2","-ledgers-transactions-loaderv2","-ledgers-ledgers-loaderv2"]
-        exclude:
-          - component: WEBSERVERS
+        include:
+          - component: WORKERS
             suffix: "-middle-ledgers-loader"
-          - component: WEBSERVERS
+          - component: WORKERS
             suffix: "-ledgers-wallets-loaderv2"
-          - component: WEBSERVERS
+          - component: WORKERS
             suffix: "-ledgers-transactions-loaderv2"   
-          - component: WEBSERVERS
+          - component: WORKERS
             suffix: "-ledgers-ledgers-loaderv2"              
 
 
