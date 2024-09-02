@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        env: [ dev, prd]
         component: [ WEBSERVERS, SQSWORKERS ]
         include:
           - component: WORKERS
