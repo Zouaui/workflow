@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        env: [int, ppd]
         type: [WORKERS]
         service: [-middle-ledgers-loader,-ledgers-wallets-loaderv2,-ledgers-transactions-loaderv2,-ledgers-ledgers-loaderv2]
         include:
@@ -17,7 +16,7 @@ jobs:
             service: -ledgers
           - type: SQSWORKERS
             service: -ledgers            
-
+        env: [int, ppd]
                     
             
 
