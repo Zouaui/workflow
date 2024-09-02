@@ -1,104 +1,20 @@
 name: Docker Build & Deploy
 
 on:      
-  pull_request:
-    branches:
-      - main
-    types: [closed]  
-  release:
-    types: [prereleased]
+  push
 
 
 jobs:
   Build:
     runs-on: ubuntu-latest
-    environment: int
+    strategy:
+      matrix:
+        environment: [ int, stg-approval ]
+        component: [ WEBSERVERS, WORKERS ]
+        include:
+          - suffix: test 
     steps:
     - name: Build
-      run: env
+      run: echo ${{ matrix.environment }} - ${{ matrix.component }}- ${{ matrix.suffix }}
       
       
-  Build-prod:
-    runs-on: ubuntu-latest
-    environment: int
-    if: github.event.release.prerelease == true 
-    steps:
-    - name: Build
-      run: echo "Build"
-      
-  Trivy:
-    runs-on: ubuntu-latest
-    needs: Build    
-    steps:
-    - name: Trivy
-      run: echo "Trivy"
-      
-  Sonar:
-    runs-on: ubuntu-latest
-    needs: Build    
-    steps:
-    - name: Sonar
-      run: echo "Sonar"
-      
-  Mvn:
-    runs-on: ubuntu-latest
-    needs: Build    
-    steps:
-    - name: Mvn
-      run: echo "Mvn"
-      
-  Deploy-Integration-and-Staging:
-    needs: 
-      - Build
-      - Trivy  
-      - Mvn
-      - Sonar
-    runs-on: ubuntu-latest
-    if: success() && github.event_name == 'pull_request' 
-    steps:
-    - name: Deploy to Integration and Staging
-      run: |
-        # Deployment scripts for integration (int) and staging (stg)
-        echo "Deploy to Integration and Staging"
-
-
-  Deploy-Pre-Production:
-    needs: 
-      - Build-prod   
-    runs-on: ubuntu-latest
-    environment: ppd
-    steps:
-    - name: Deploy to Pre-production
-      run: |
-        # Deployment script for pre-production (ppd)
-        echo "Deployment script for pre-production (ppd)"      
-
-  Release:
-    runs-on: ubuntu-latest
-    needs: Deploy-Pre-Production
-    environment: release   
-    permissions:
-      contents: write    
-
-    steps:
-    - name: Deploy to Production
-      run: echo "RELEASE"
-      
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Release
-      uses: softprops/action-gh-release@v2
-      if: github.event.release.prerelease == true
-      with:
-        prerelease: false
-        
-  Deploy-Production:
-    runs-on: ubuntu-latest
-    needs: Release
-    environment: prd
-    steps:
-    - name: Deploy to Production
-      run: |
-        # Deployment script for production (prd)
-        echo "Deployment script for production (prd)"
