@@ -9,8 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        component: [ WORKERS, WEBSERVERS, SQSWORKERS ]
-        suffix: [-middle-ledgers-loader,-ledgers-wallets-loaderv2,-ledgers-transactions-loaderv2,-ledgers-ledgers-loaderv2]
+        env: [ stg, prd ]
+        include:
+          - component: WORKERS
+            suffix: "-middle-ledgers-loader"
+          - component: WORKERS
+            suffix: "-ledgers-wallets-loaderv2"
+          - component: WORKERS
+            suffix: "-ledgers-transactions-loaderv2"   
+          - component: WORKERS
+            suffix: "-ledgers-ledgers-loaderv2"              
+        component: [ WEBSERVERS, SQSWORKERS ]
+
+          
             
 
     steps:
