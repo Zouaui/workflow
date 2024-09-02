@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        env: [ dev, ppd]
         type: [WORKERS, WEBSERVERS, SQSWORKERS]
         service: [middle-ledgers-loader, ledgers-wallets-loaderv2, ledgers-transactions-loaderv2, ledgers-ledgers-loaderv2, ledgers]
         include:
@@ -31,5 +32,5 @@ jobs:
 
     steps:
     - name: Build
-      run: echo  ${{ matrix.component }} ${{ matrix.suffix }} ${{ matrix.env }} 
+      run: echo  ${{ matrix.type }} ${{ matrix.service }} ${{ matrix.env }} 
     
