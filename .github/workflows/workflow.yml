@@ -27,5 +27,5 @@ jobs:
 
     steps:
     - name: Build
-      run: echo  ${{ matrix.component }}- ${{ matrix.suffix }}
+      run: echo  ${{ matrix.component }} ${{ matrix.suffix }} ${{ matrix.env }} 
     
