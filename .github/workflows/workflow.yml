@@ -12,12 +12,16 @@ jobs:
         env: [ dev, prd]
         component: [ WEBSERVERS, SQSWORKERS ]
         include:
+          - env: dev
           - component: WORKERS
             suffix: "-middle-ledgers-loader"
+          - env: dev  
           - component: WORKERS
             suffix: "-ledgers-wallets-loaderv2"
+          - env: dev  
           - component: WORKERS
             suffix: "-ledgers-transactions-loaderv2"   
+          - env: dev  
           - component: WORKERS
             suffix: "-ledgers-ledgers-loaderv2"              
 
