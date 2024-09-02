@@ -9,11 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        component: [ WEBSERVERS, WORKERS ]
+        suffix: [ test, test2 ]
         include:
           - component: WORKERS
-            suffix: test
-                steps:
+
+    steps:
     - name: Build
       run: echo  ${{ matrix.component }}- ${{ matrix.suffix }}
       
