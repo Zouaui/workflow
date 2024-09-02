@@ -11,14 +11,10 @@ jobs:
       matrix:
         type: [WORKERS, WEBSERVERS, SQSWORKERS]
         include:
-          - service: middle-ledgers-loader
-            type: WORKERS
-          - service: ledgers-wallets-loaderv2
-            type: WORKERS
-      
-
-
-          
+          - type: WORKERS
+            service: -middle-ledgers-loader
+            service2: -ledgers-wallets-loaderv2
+                    
             
 
     steps:
