@@ -9,13 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        environment: [ int, stg-approval ]
         component: [ WEBSERVERS, WORKERS ]
         include:
           - component: WORKERS
-          - suffix: test 
-    steps:
+            suffix: test
+                steps:
     - name: Build
-      run: echo ${{ matrix.environment }} - ${{ matrix.component }}- ${{ matrix.suffix }}
+      run: echo  ${{ matrix.component }}- ${{ matrix.suffix }}
       
       
