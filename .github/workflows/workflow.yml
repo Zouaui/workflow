@@ -12,6 +12,7 @@ jobs:
         environment: [ int, stg-approval ]
         component: [ WEBSERVERS, WORKERS ]
         include:
+          - component: WORKERS
           - suffix: test 
     steps:
     - name: Build
