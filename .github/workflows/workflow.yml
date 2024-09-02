@@ -15,14 +15,7 @@ jobs:
             service: middle-ledgers-loader
           - type: WORKERS
             service: ledgers-wallets-loaderv2
-          - type: WORKERS
-            service: ledgers-transactions-loaderv2
-          - type: WORKERS
-            service: ledgers-ledgers-loaderv2
-          - type: WEBSERVERS
-            service: ledgers
-          - type: SQSWORKERS
-            service: ledgers            
+      
 
 
           
