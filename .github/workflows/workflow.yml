@@ -9,11 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        type: [WORKERS, WEBSERVERS, SQSWORKERS]
+        type: [WORKERS]
+        service: [-middle-ledgers-loader,-ledgers-wallets-loaderv2,-ledgers-transactions-loaderv2,-ledgers-ledgers-loaderv2]
         include:
-          - type: WORKERS
-            service: -middle-ledgers-loader
-            service2: -ledgers-wallets-loaderv2
+          - type: WEBSERVERS
+            service: -ledgers
+          - type: SQSWORKERS
+            service: -ledgers            
+
                     
             
 
