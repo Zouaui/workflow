@@ -9,12 +9,19 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        suffix: [ test, test2 ]
+        component: [ WORKERS, WEBSERVERS, SQSWORKERS ]
         include:
-          - component: WORKERS
+          - suffix: -middle-ledgers-loader
+            component: WORKERS
+          - suffix: -ledgers-wallets-loaderv2
+            component: WORKERS
+          - suffix: -ledgers-transactions-loaderv2
+            component: WORKERS
+          - suffix: -ledgers-ledgers-loaderv2
+            component: WORKERS  
+            
 
     steps:
     - name: Build
       run: echo  ${{ matrix.component }}- ${{ matrix.suffix }}
-      
-      
+    
