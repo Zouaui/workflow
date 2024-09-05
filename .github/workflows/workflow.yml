@@ -1,23 +1,14 @@
 name: Docker Build & Deploy
-
 on:      
   push
-
-
 jobs:
   Build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        environment: [ int, stg-approval ]
+        environment: [ int, stg ]
         include:
           # WORKERS combinations
-          - component: WORKERS
-            suffix: ledgers-wallets-loaderv2
-          - component: WORKERS
-            suffix: ledgers-transactions-loaderv2
-          - component: WORKERS
-            suffix: ledgers-ledgers-loaderv2
           - component: WORKERS
             suffix: ledgers-wallets-loaderv2
           - component: WORKERS
@@ -30,12 +21,6 @@ jobs:
           # SQSWORKERS combinations
           - component: SQSWORKERS
             suffix: ledgers
-
-        
-
-                    
-            
-
     steps:
     - name: Build
       run: echo  ${{ matrix.environment }} ${{ matrix.component }} ${{ matrix.suffix }} 
