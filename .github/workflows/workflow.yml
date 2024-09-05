@@ -9,18 +9,34 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        type: [WORKERS]
-        service: [-middle-ledgers-loader,-ledgers-wallets-loaderv2,-ledgers-transactions-loaderv2,-ledgers-ledgers-loaderv2]
+        environment: [ int, stg-approval ]
         include:
-          - type: WEBSERVERS
-            service: -ledgers
-          - type: SQSWORKERS
-            service: -ledgers            
-        env: [int, ppd]
+          # WORKERS combinations
+          - component: WORKERS
+            suffix: ledgers-wallets-loaderv2
+          - component: WORKERS
+            suffix: ledgers-transactions-loaderv2
+          - component: WORKERS
+            suffix: ledgers-ledgers-loaderv2
+          - component: WORKERS
+            suffix: ledgers-wallets-loaderv2
+          - component: WORKERS
+            suffix: ledgers-transactions-loaderv2
+          - component: WORKERS
+            suffix: ledgers-ledgers-loaderv2
+          # WEBSERVERS combinations
+          - component: WEBSERVERS
+            suffix: ledgers
+          # SQSWORKERS combinations
+          - component: SQSWORKERS
+            suffix: ledgers
+
+        
+
                     
             
 
     steps:
     - name: Build
-      run: echo  ${{ matrix.type }} ${{ matrix.service }} ${{ matrix.env }} 
+      run: echo  ${{ matrix.environment }} ${{ matrix.component }} ${{ matrix.suffix }} 
     
