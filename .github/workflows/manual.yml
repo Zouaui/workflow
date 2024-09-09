@@ -94,16 +94,8 @@ jobs:
                 with:
                     token: ${{ secrets.PAT_TOKEN }}
 
-            -   name: Create pre-release tag
-                id: release
-                uses: googleapis/release-please-action@v4
-                with:
-                    token: ${{ secrets.PAT_TOKEN }}
-                    skip-github-release: false
-                    skip-github-pull-request: true
 
             -   name: Tag subsequent major and minor versions
-                if: ${{ steps.release.outputs.release_created }}
                 env:
                     GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
                 run: |
