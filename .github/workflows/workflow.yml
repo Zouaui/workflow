@@ -1,1 +1,13 @@
+name: Deploy V2 PPD & PRD
+on:
+  release:
+    types: [ released ]
+jobs:
+  ecr-push:
+    name: Ecr_push_t
+    runs-on: ubuntu-latest
 
+
+    steps:
+      - name: Push to ECR
+        run: echo test
