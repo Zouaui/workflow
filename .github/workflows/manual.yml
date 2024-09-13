@@ -16,8 +16,18 @@ on:
 jobs:
     create_release:
         runs-on: ubuntu-latest
-
+        strategy:
+          matrix:
+            component: [WORKERS]
+            suffix: [ledgers-wallets-loaderv2,ledgers-transactions-loaderv2,ledgers-ledgers-loaderv2]
+            include:
+              - component: WEBSERVERS
+                suffix: ledgers
+              - component: SQSWORKERS
+                suffix: ledgers
+              - component: SQSWORKERS
+                suffix: ledgerv2                
         steps:
           - name: Release 
-            run: echo "test"
+            run: echo ${{ matrix.component }} ${{ matrix.suffix }} 
  
