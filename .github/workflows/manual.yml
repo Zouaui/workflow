@@ -21,12 +21,12 @@ jobs:
             component: [WORKERS]
             suffix: [ledgers-wallets-loaderv2,ledgers-transactions-loaderv2,ledgers-ledgers-loaderv2]
             include:
-              - component: WEBSERVERS
-                suffix: ledgers
-              - component: SQSWORKERS
-                suffix: ledgers
-              - component: SQSWORKERS
-                suffix: ledgerv2                
+              - suffix: ledgers
+                component: WEBSERVERS
+              - suffix: ledgers
+                component: SQSWORKERS
+              - suffix: ledgerv2                
+                component: SQSWORKERS
         steps:
           - name: Release 
             run: echo ${{ matrix.component }} ${{ matrix.suffix }} 
