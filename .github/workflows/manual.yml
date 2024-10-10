@@ -16,17 +16,11 @@ on:
 jobs:
     create_release:
         runs-on: ubuntu-latest
+        if: ${{ inputs.environment }} == "int" || ${{ inputs.environment }} == "stg"
         strategy:
           matrix:
-            component: [WORKERS]
-            suffix: [ledgers-wallets-loaderv2,ledgers-transactions-loaderv2,ledgers-ledgers-loaderv2]
-            include:
-              - suffix: ledgers
-                component: WEBSERVERS
-              - suffix: ledgers
-                component: SQSWORKERS
-              - suffix: ledgerv2                
-                component: SQSWORKERS
+            environment: [int, stg, ppd, prd]
+        
         steps:
           - name: Release 
             run: echo ${{ matrix.component }} ${{ matrix.suffix }} 
