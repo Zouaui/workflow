@@ -21,15 +21,21 @@ on:
 jobs:
     create_release:
         runs-on: ubuntu-latest
-        
         strategy:
           matrix:
-            environment: [int, stg, ppd, prd]
+            environment: [int, stg]
         
         steps:
           - name: Release 
             if: ${{ github.event_name == 'workflow_dispatch' }}
             run: echo ${{ matrix.environment }}
             
-          - name: Release 2
-            run: echo "lkdlzkenvlzknvlkz ${{ matrix.environment }}"
+    create_release2:
+        runs-on: ubuntu-latest
+        needs: create_release
+        strategy:
+          matrix:
+            environment: [int, stg, ppd, prd]
+        steps:   
+          - name: Release 
+            run: echo "toto ${{ matrix.environment }}"
